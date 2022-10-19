@@ -53,6 +53,8 @@ jobs:
         shell: bash
         run: |
           cd ~/blender-git
+          echo "install_deps help:"
+          ./blender/build_files/build_environment/install_deps.sh --help
           ./blender/build_files/build_environment/install_deps.sh -with-embree -build-embree
           
       - name: Init Cmake
