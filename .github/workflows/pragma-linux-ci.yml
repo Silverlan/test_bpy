@@ -48,10 +48,7 @@ jobs:
           mkdir ~/blender-git
           cd ~/blender-git
           git clone https://git.blender.org/blender.git
-          
-      - uses: mxschmitt/action-tmate@v3
-        name: CI0
-          
+
       - name: Deps
         shell: bash
         run: |
