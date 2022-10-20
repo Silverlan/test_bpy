@@ -59,6 +59,7 @@ jobs:
           # ./blender/build_files/build_environment/install_deps.sh --with-embree
           # The above should work but doesn't, so we force-replace it in the shell script
           ex -s -c '%s/WITH_EMBREE=false/WITH_EMBREE=true/g|x' ./blender/build_files/build_environment/install_deps.sh
+          ./blender/build_files/build_environment/install_deps.sh --with-embree
           
       - name: Init Cmake
         shell: bash
