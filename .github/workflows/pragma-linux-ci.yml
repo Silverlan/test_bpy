@@ -31,6 +31,19 @@ jobs:
         with:
           submodules: true
 
+      - name: Build Blender
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install build-essential git subversion cmake libx11-dev libxxf86vm-dev libxcursor-dev libxi-dev libxrandr-dev libxinerama-dev libegl-dev
+          sudo apt install libwayland-dev wayland-protocols libxkbcommon-dev libdbus-1-dev linux-libc-dev
+          mkdir ~/blender-git
+          cd ~/blender-git
+          git clone https://git.blender.org/blender.git
+          cd ~/blender-git
+          ./blender/build_files/build_environment/install_deps.sh --with-embree
+
+
       - name: Setup
         id: setup
         uses: Silverlan/common_actions/setup@main
