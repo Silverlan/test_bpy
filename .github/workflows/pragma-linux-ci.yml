@@ -42,3 +42,6 @@ jobs:
           git clone https://git.blender.org/blender.git
           cd ~/blender-git
           ./blender/build_files/build_environment/install_deps.sh --with-embree
+
+      - uses: mxschmitt/action-tmate@v3
+        name: CI
