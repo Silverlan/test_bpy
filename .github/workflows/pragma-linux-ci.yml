@@ -27,10 +27,6 @@ jobs:
             generators: "Unix Makefiles"
             build_dir: 'build'
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-
       - name: Build Blender
         shell: bash
         run: |
@@ -42,6 +38,10 @@ jobs:
           git clone https://git.blender.org/blender.git
           cd ~/blender-git
           ./blender/build_files/build_environment/install_deps.sh --with-embree
+          
+          cd ~/blender-git/blender
+          make update
+          make bpy
 
       - uses: mxschmitt/action-tmate@v3
         name: CI
