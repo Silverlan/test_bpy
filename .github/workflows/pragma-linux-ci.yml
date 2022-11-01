@@ -38,7 +38,7 @@ jobs:
           cd ~/blender-git
           git clone https://git.blender.org/blender.git
           cd ~/blender-git
-          sudo sh ./blender/build_files/build_environment/install_deps.sh "--with-embree"
+          sudo sh ./blender/build_files/build_environment/install_deps.sh --with-embree
           
           cd ~/blender-git/blender
           make update
