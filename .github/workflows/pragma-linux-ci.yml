@@ -29,6 +29,7 @@ jobs:
     steps:
       - name: Build Blender
         shell: bash
+        continue-on-error: true
         run: |
           sudo apt update
           sudo apt install build-essential git subversion cmake libx11-dev libxxf86vm-dev libxcursor-dev libxi-dev libxrandr-dev libxinerama-dev libegl-dev
@@ -37,7 +38,7 @@ jobs:
           cd ~/blender-git
           git clone https://git.blender.org/blender.git
           cd ~/blender-git
-          ./blender/build_files/build_environment/install_deps.sh --with-embree
+          sudo sh ./blender/build_files/build_environment/install_deps.sh "--with-embree"
           
           cd ~/blender-git/blender
           make update
