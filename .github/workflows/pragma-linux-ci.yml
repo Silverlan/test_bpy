@@ -51,5 +51,15 @@ jobs:
           make update
           make bpy BUILD_CMAKE_ARGS=" -D LLVM_CONFIG=/usr/bin/llvm-config-14 -D LLVM_LIBPATH=/usr/lib/llvm-14/lib -D LLVM_ROOT_DIR=/usr/lib/llvm-14.0 -D LLVM_STATIC=OFF -D LLVM_VERSION=14.0"
 
-      - uses: mxschmitt/action-tmate@v3
-        name: CI
+      - name: Create Release Files
+        shell: bash
+        run: |
+          mkdir release
+          rsync /home/runner/blender-git/build_linux_bpy release
+          
+      - name: Release Binaries
+        uses: Silverlan/common_actions/release_nightly_binaries@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit: ${{ github.ref_name }}
+
