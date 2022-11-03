@@ -55,7 +55,7 @@ jobs:
         shell: bash
         run: |
           mkdir release
-          rsync -r /home/runner/blender-git/build_linux_bpy/ release
+          rsync -r /home/runner/blender-git/build_linux_bpy/bin/ release
           
       - name: Release Binaries
         uses: Silverlan/common_actions/release_nightly_binaries@main
