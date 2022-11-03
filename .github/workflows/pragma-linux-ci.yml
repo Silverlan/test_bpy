@@ -62,4 +62,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit: ${{ github.ref_name }}
-
+          update_tag: '0'
