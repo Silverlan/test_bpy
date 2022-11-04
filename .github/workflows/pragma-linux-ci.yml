@@ -57,9 +57,35 @@ jobs:
           mkdir release
           rsync -r /home/runner/blender-git/build_linux_bpy/bin/ release
           
-      - name: Release Binaries
-        uses: Silverlan/common_actions/release_nightly_binaries@main
+      - name: Create Release Files
+        shell: bash
+        id: generate-archive
+        run: |
+          cd release
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            archiveName=binaries_linux64.tar.gz
+            tar -czvf $archiveName *
+          else
+            archiveName=binaries_windows64.zip
+            tar -cvf $archiveName *
+          fi
+          mv $archiveName ../$archiveName
+          echo "::set-output name=archive-name::$archiveName"
+          
+      - name: Release
+        uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "${{ steps.generate-archive.outputs.archive-name }}"
+          body: "Automatically generated binaries."
           commit: ${{ github.ref_name }}
-          update_tag: '0'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: latest
+          replacesArtifacts: true
+          allowUpdates: true
+          
+      #- name: Release Binaries
+      #  uses: Silverlan/common_actions/release_nightly_binaries@main
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    commit: ${{ github.ref_name }}
+      #    update_tag: '0'
