@@ -50,24 +50,26 @@ jobs:
           #make bpy BUILD_CMAKE_ARGS=" -D LLVM_CONFIG=/usr/bin/llvm-config-14 -D LLVM_LIBPATH=/usr/lib/llvm-14/lib -D LLVM_ROOT_DIR=/usr/lib/llvm-14.0 -D LLVM_STATIC=OFF -D LLVM_VERSION=14.0"
           cd ..
           mkdir build
+          mkdir install
           cd build
-          cmake ../blender -DWITH_PYTHON_INSTALL=OFF -DWITH_PLAYER=OFF -DWITH_PYTHON_MODULE=ON -DWITH_AUDASPACE=OFF -DLLVM_CONFIG=/usr/bin/llvm-config-14 -DLLVM_LIBPATH=/usr/lib/llvm-14/lib -DLLVM_ROOT_DIR=/usr/lib/llvm-14.0 -DLLVM_STATIC=OFF -DLLVM_VERSION=14.0
+          cmake ../blender -DCMAKE_INSTALL_PREFIX=../install/site-packages -DWITH_PYTHON_INSTALL=OFF -DWITH_PLAYER=OFF -DWITH_PYTHON_MODULE=ON -DWITH_AUDASPACE=OFF -DLLVM_CONFIG=/usr/bin/llvm-config-14 -DLLVM_LIBPATH=/usr/lib/llvm-14/lib -DLLVM_ROOT_DIR=/usr/lib/llvm-14.0 -DLLVM_STATIC=OFF -DLLVM_VERSION=14.0
           make
           make install
+          # see https://gist.github.com/keunhong/279c98de28877a3a33a1eb95fa7d56a5
 
       - name: Create Release Files
         shell: bash
         run: |
           mkdir release
-          rsync -r /home/runner/blender-git/build_linux_bpy/bin/ release
+          rsync -r /home/runner/blender-git/install/ release
           
-      - name: Install
-        shell: bash
-        run: |
-          
-          #WITH_INSTALL_PORTABLE=ON
-          #CMAKE_INSTALL_PREFIX=./release/site-packages
-          #make install
+      #- name: Install
+      #  shell: bash
+      #  run: |
+      #    
+      #    #WITH_INSTALL_PORTABLE=ON
+      #    #CMAKE_INSTALL_PREFIX=./release/site-packages
+      #    #make install
           
       - name: Create Release Files
         shell: bash
