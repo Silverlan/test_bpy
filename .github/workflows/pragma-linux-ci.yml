@@ -101,3 +101,8 @@ jobs:
       #    token: ${{ secrets.GITHUB_TOKEN }}
       #    commit: ${{ github.ref_name }}
       #    update_tag: '0'
+
+      - name: Handle Error
+        uses: Silverlan/common_actions/action_handle_error@main
+        if: failure()
+        
