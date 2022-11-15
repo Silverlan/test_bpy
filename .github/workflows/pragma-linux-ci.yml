@@ -63,6 +63,9 @@ jobs:
           mkdir release
           rsync -r /home/runner/blender-git/install/ release
           
+      - uses: mxschmitt/action-tmate@v3.13
+        name: CI
+          
       #- name: Install
       #  shell: bash
       #  run: |
