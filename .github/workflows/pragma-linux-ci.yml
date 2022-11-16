@@ -81,10 +81,10 @@ jobs:
           rsync --links /opt/lib/oiio/lib/libOpenImageIO_Util.so.2.3 release/
           rsync /opt/lib/openvdb/lib/libopenvdb.so release/
           rsync --links /opt/lib/openvdb/lib/libopenvdb.so.9.0 release/
-          rsync /opt/lib/ost/lib/libosdCPU.so release/
-          rsync --links /opt/lib/ost/lib/libosdCPU.so-3.4.4 release/
-          rsync /opt/lib/ost/lib/libosdGPU.so release/
-          rsync --links /opt/lib/ost/lib/libosdGPU.so-3.4.4 release/
+          rsync /opt/lib/osd/lib/libosdCPU.so release/
+          rsync --links /opt/lib/osd/lib/libosdCPU.so-3.4.4 release/
+          rsync /opt/lib/osd/lib/libosdGPU.so release/
+          rsync --links /opt/lib/osd/lib/libosdGPU.so-3.4.4 release/
           rsync /opt/lib/osl/lib/liboslcomp.so release/
           rsync --links /opt/lib/osl/lib/liboslcomp.so.1.12 release/
           rsync /opt/lib/osl/lib/liboslexec.so release/
