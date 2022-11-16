@@ -63,50 +63,50 @@ jobs:
           mkdir release
           rsync -r /home/runner/blender-git/install/ release
           
-          rsync /opt/lib/blosc/lib/libblosc.so release/
-          rsync --links /opt/lib/blosc/lib/libblosc.so.1 release/
-          rsync /opt/lib/openexr/lib/libIex-3_1.so release/
-          rsync --links /opt/lib/openexr/lib/libIex-3_1.so.30 release/
-          rsync /opt/lib/openexr/lib/libIlmThread-3_1.so release/
-          rsync --links /opt/lib/openexr/lib/libIlmThread-3_1.so.30 release/
-          rsync /opt/lib/ocio/lib/libOpenColorIO.so release/
-          rsync --links /opt/lib/ocio/lib/libOpenColorIO.so.2.1 release/
-          rsync /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so release/
-          rsync --links /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so.30 release/
-          rsync /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so release/
-          rsync --links /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so.30 release/
-          rsync /opt/lib/oiio/lib/libOpenImageIO.so release/
-          rsync --links /opt/lib/oiio/lib/libOpenImageIO.so.2.3 release/
-          rsync /opt/lib/oiio/lib/libOpenImageIO_Util.so release/
-          rsync --links /opt/lib/oiio/lib/libOpenImageIO_Util.so.2.3 release/
-          rsync /opt/lib/openvdb/lib/libopenvdb.so release/
-          rsync --links /opt/lib/openvdb/lib/libopenvdb.so.9.0 release/
-          rsync /opt/lib/osd/lib/libosdCPU.so release/
-          rsync --links /opt/lib/osd/lib/libosdCPU.so-3.4.4 release/
-          rsync /opt/lib/osd/lib/libosdGPU.so release/
-          rsync --links /opt/lib/osd/lib/libosdGPU.so-3.4.4 release/
-          rsync /opt/lib/osl/lib/liboslcomp.so release/
-          rsync --links /opt/lib/osl/lib/liboslcomp.so.1.12 release/
-          rsync /opt/lib/osl/lib/liboslexec.so release/
-          rsync --links /opt/lib/osl/lib/liboslexec.so.1.12 release/
-          rsync /opt/lib/osl/lib/liboslnoise.so release/
-          rsync --links /opt/lib/osl/lib/liboslnoise.so.1.12 release/
-          rsync /opt/lib/osl/lib/liboslquery.so release/
-          rsync --links /opt/lib/osl/lib/liboslquery.so.1.12 release/
-          rsync /opt/lib/tbb/lib/libtbb.so release/
-          rsync --links /opt/lib/tbb/lib/libtbbmalloc.so release/
-          rsync /opt/lib/usd/lib/libusd_usd_ms.so release/
-          rsync --links /lib/x86_64-linux-gnu/libhpdf-2.3.0.so release/
-          rsync /lib/x86_64-linux-gnu/libImath-3_1.so release/
-          rsync --links /lib/x86_64-linux-gnu/libImath-3_1.so.29 release/
-          rsync /lib/x86_64-linux-gnu/libjemalloc.so release/
-          rsync --links /lib/x86_64-linux-gnu/libjemalloc.so.2 release/
-          rsync /lib/x86_64-linux-gnu/libpotrace.so release/
-          rsync --links /lib/x86_64-linux-gnu/libpotrace.so.0 release/
-          rsync /lib/x86_64-linux-gnu/libpystring.so release/
-          rsync --links /lib/x86_64-linux-gnu/libpystring.so.0 release/
-          rsync /lib/x86_64-linux-gnu/libyaml-cpp.so release/
-          rsync --links /lib/x86_64-linux-gnu/libyaml-cpp.so.0.7 release/
+          rsync --ignore-missing-args /opt/lib/blosc/lib/libblosc.so release/
+          rsync --ignore-missing-args --links /opt/lib/blosc/lib/libblosc.so.1 release/
+          rsync --ignore-missing-args /opt/lib/openexr/lib/libIex-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr/lib/libIex-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/openexr/lib/libIlmThread-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr/lib/libIlmThread-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/ocio/lib/libOpenColorIO.so release/
+          rsync --ignore-missing-args --links /opt/lib/ocio/lib/libOpenColorIO.so.2.1 release/
+          rsync --ignore-missing-args /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/oiio/lib/libOpenImageIO.so release/
+          rsync --ignore-missing-args --links /opt/lib/oiio/lib/libOpenImageIO.so.2.3 release/
+          rsync --ignore-missing-args /opt/lib/oiio/lib/libOpenImageIO_Util.so release/
+          rsync --ignore-missing-args --links /opt/lib/oiio/lib/libOpenImageIO_Util.so.2.3 release/
+          rsync --ignore-missing-args /opt/lib/openvdb/lib/libopenvdb.so release/
+          rsync --ignore-missing-args --links /opt/lib/openvdb/lib/libopenvdb.so.9.0 release/
+          rsync --ignore-missing-args /opt/lib/osd/lib/libosdCPU.so release/
+          rsync --ignore-missing-args --links /opt/lib/osd/lib/libosdCPU.so-3.4.4 release/
+          rsync --ignore-missing-args /opt/lib/osd/lib/libosdGPU.so release/
+          rsync --ignore-missing-args --links /opt/lib/osd/lib/libosdGPU.so-3.4.4 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslcomp.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslcomp.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslexec.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslexec.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslnoise.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslnoise.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslquery.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslquery.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/tbb/lib/libtbb.so release/
+          rsync --ignore-missing-args --links /opt/lib/tbb/lib/libtbbmalloc.so release/
+          rsync --ignore-missing-args /opt/lib/usd/lib/libusd_usd_ms.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libhpdf-2.3.0.so release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libImath-3_1.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libImath-3_1.so.29 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libjemalloc.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libjemalloc.so.2 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libpotrace.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libpotrace.so.0 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libpystring.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libpystring.so.0 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libyaml-cpp.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libyaml-cpp.so.0.7 release/
           
       #- uses: mxschmitt/action-tmate@v3.13
       #  name: CI
