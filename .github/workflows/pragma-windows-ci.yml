@@ -1,0 +1,139 @@
+name: Build Windows
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: environment-win-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build - ${{ matrix.config.os }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: windows-latest
+            name: "Windows x64 MSVC"
+            artifact: "Windows-MSVC.tar.xz"
+            build_type: "RelWithDebInfo"
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+            cc: "cl"
+            cxx: "cl"
+            archiver: "7z a"
+            generators: "Visual Studio 17 2022"
+            build_dir: 'build'
+    steps:
+      - name: Install Blender dependencies
+        shell: bash
+        run: |
+          mkdir ~/blender-git
+          cd ~/blender-git
+          git clone https://projects.blender.org/blender/blender.git
+          
+      - name: Build Blender
+        shell: bash
+        run: |
+          cd ~/blender-git/blender
+          make update
+          ./make.bat bpy
+
+      - name: Print all files
+        shell: bash
+        run: |
+          echo "ALL FILES"
+          ls -R
+          echo "ALL FILES END"
+
+      - name: Create Release Files
+        shell: bash
+        run: |
+          mkdir release
+          rsync -r /home/runner/blender-git/install/ release
+          
+          rsync --ignore-missing-args /opt/lib/blosc/lib/libblosc.so release/
+          rsync --ignore-missing-args --links /opt/lib/blosc/lib/libblosc.so.1 release/
+          rsync --ignore-missing-args /opt/lib/openexr/lib/libIex-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr/lib/libIex-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/openexr/lib/libIlmThread-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr/lib/libIlmThread-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/ocio/lib/libOpenColorIO.so release/
+          rsync --ignore-missing-args --links /opt/lib/ocio/lib/libOpenColorIO.so.2.1 release/
+          rsync --ignore-missing-args /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr-3.1/lib/libOpenEXR-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so release/
+          rsync --ignore-missing-args --links /opt/lib/openexr-3.1/lib/libOpenEXRCore-3_1.so.30 release/
+          rsync --ignore-missing-args /opt/lib/oiio/lib/libOpenImageIO.so release/
+          rsync --ignore-missing-args --links /opt/lib/oiio/lib/libOpenImageIO.so.2.3 release/
+          rsync --ignore-missing-args /opt/lib/oiio/lib/libOpenImageIO_Util.so release/
+          rsync --ignore-missing-args --links /opt/lib/oiio/lib/libOpenImageIO_Util.so.2.3 release/
+          rsync --ignore-missing-args /opt/lib/openvdb/lib/libopenvdb.so release/
+          rsync --ignore-missing-args --links /opt/lib/openvdb/lib/libopenvdb.so.9.0 release/
+          rsync --ignore-missing-args /opt/lib/osd/lib/libosdCPU.so release/
+          rsync --ignore-missing-args --links /opt/lib/osd/lib/libosdCPU.so-3.4.4 release/
+          rsync --ignore-missing-args /opt/lib/osd/lib/libosdGPU.so release/
+          rsync --ignore-missing-args --links /opt/lib/osd/lib/libosdGPU.so-3.4.4 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslcomp.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslcomp.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslexec.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslexec.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslnoise.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslnoise.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/osl/lib/liboslquery.so release/
+          rsync --ignore-missing-args --links /opt/lib/osl/lib/liboslquery.so.1.12 release/
+          rsync --ignore-missing-args /opt/lib/tbb/lib/libtbb.so release/
+          rsync --ignore-missing-args --links /opt/lib/tbb/lib/libtbbmalloc.so release/
+          rsync --ignore-missing-args /opt/lib/usd/lib/libusd_usd_ms.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libhpdf-2.3.0.so release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libImath-3_1.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libImath-3_1.so.29 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libjemalloc.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libjemalloc.so.2 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libpotrace.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libpotrace.so.0 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libpystring.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libpystring.so.0 release/
+          rsync --ignore-missing-args /lib/x86_64-linux-gnu/libyaml-cpp.so release/
+          rsync --ignore-missing-args --links /lib/x86_64-linux-gnu/libyaml-cpp.so.0.7 release/
+          
+      - name: Create Release Files
+        shell: bash
+        id: generate-archive
+        run: |
+          cd release
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            archiveName=binaries_linux64.tar.gz
+            tar -czvf $archiveName *
+          else
+            archiveName=binaries_windows64.zip
+            tar -cvf $archiveName *
+          fi
+          mv $archiveName ../$archiveName
+          echo "::set-output name=archive-name::$archiveName"
+          
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ steps.generate-archive.outputs.archive-name }}"
+          body: "Automatically generated binaries."
+          commit: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: latest
+          replacesArtifacts: true
+          allowUpdates: true
+          
+      #- name: Release Binaries
+      #  uses: Silverlan/common_actions/release_nightly_binaries@main
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    commit: ${{ github.ref_name }}
+      #    update_tag: '0'
+
+      - name: Handle Error
+        uses: Silverlan/common_actions/action_handle_error@main
+        if: failure()
+        
