@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           cd ~/blender-git/blender
-          make update
+          ./make.bat update
           ./make.bat bpy
 
       - name: Print all files
